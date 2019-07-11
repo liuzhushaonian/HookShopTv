@@ -1,8 +1,10 @@
 package com.xp.legend.hookthoptv.hooks;
 
+import android.app.Activity;
 import android.content.Context;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
@@ -35,10 +37,6 @@ public class SplashHook implements IXposedHookLoadPackage {
 
         }
 
-
-
-
-
     }
 
     private void change(ClassLoader classLoader){
@@ -56,6 +54,61 @@ public class SplashHook implements IXposedHookLoadPackage {
 
                     }
                 });
+
+
+
+        XposedHelpers.findAndHookMethod("livetvstream.thoptv.com.thoptv.Splash",
+                classLoader, "a", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        super.afterHookedMethod(param);
+
+                        param.setResult("");
+
+                    }
+                });
+
+
+        XposedHelpers.findAndHookMethod("livetvstream.thoptv.com.thoptv.player.adactivity",
+                classLoader, "g", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        super.afterHookedMethod(param);
+
+                        param.setResult("");
+
+                    }
+                });
+
+
+//        XposedHelpers.findAndHookMethod(Activity.class, "onStart", new XC_MethodHook() {
+//            @Override
+//            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                super.afterHookedMethod(param);
+//
+//                XposedBridge.log("activity--->>>"+param.thisObject.getClass().getName());
+//
+//            }
+//        });
+
+
+        XposedHelpers.findAndHookMethod("livetvstream.thoptv.com.thoptv.player.cookieplayer", classLoader, "i", new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                super.afterHookedMethod(param);
+                param.setResult("");
+            }
+        });
+
+        XposedHelpers.findAndHookMethod("livetvstream.thoptv.com.thoptv.player.jioplayeractivity", classLoader, "i", new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                super.afterHookedMethod(param);
+                param.setResult("");
+            }
+        });
+
+
 
     }
 
