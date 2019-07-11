@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">HookThopTv</string>
+    <string name="moduel_info">Remove the Thoptv detection packet capture software</string>
+</resources>
